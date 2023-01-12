@@ -12,7 +12,6 @@ const initialState = {
 	email: "",
 	password: "",
 	isMember: true,
-	isAlreadyLogin: false,
 };
 
 const RegisterPage = () => {
@@ -59,14 +58,12 @@ const RegisterPage = () => {
 
 	useEffect(() => {
 		if (user) {
-			setState({ ...state, isAlreadyLogin: !state.isAlreadyLogin });
 			setTimeout(() => {
 				navigate("/");
 			}, 1500);
 		}
-	}, [user, navigate]);
+	}, [user, navigate, state]);
 
-	console.log(state.isAlreadyLogin);
 	return (
 		<Wrapper className="full-page">
 			<form className="form" onSubmit={onSubmit}>
@@ -84,21 +81,21 @@ const RegisterPage = () => {
 				<FormInput
 					type="email"
 					name="email"
-					value={state.isAlreadyLogin ? user.email : state.email}
-					isDisable={state.isAlreadyLogin}
+					value={state.email}
+					isDisable={Boolean(user)}
 					onChange={onChangeHandler}
 				/>
 				<FormInput
 					type="password"
 					name="password"
-					value={state.isAlreadyLogin ? user.name : state.password}
-					isDisable={state.isAlreadyLogin}
+					value={state.password}
+					isDisable={Boolean(user)}
 					onChange={onChangeHandler}
 				/>
 				<button
 					type="summit"
 					className="btn btn-block"
-					disabled={isLoading || state.isAlreadyLogin}
+					disabled={isLoading || Boolean(user)}
 				>
 					{state.isMember ? "login" : "register"}
 				</button>
@@ -110,7 +107,7 @@ const RegisterPage = () => {
 						type="button"
 						className="member-btn"
 						onClick={toggleMember}
-						disabled={isLoading || state.isAlreadyLogin}
+						disabled={isLoading || Boolean(user)}
 					>
 						{state.isMember ? "Register" : "Login"}
 					</button>

@@ -1,6 +1,4 @@
-
 const FormInput = ({ type, name, value, onChange, isDisable }) => {
-	console.log("input page", isDisable)
 	return (
 		<div className="form-row">
 			<label htmlFor={name} className="form-label">

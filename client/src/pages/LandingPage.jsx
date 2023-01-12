@@ -1,11 +1,20 @@
+import { useEffect } from "react";
 import Main from "../assets/images/main.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Wrapper from "../assets/wrappers/LandingPage";
 
-import {Logo} from '../components/index'
+import { Logo } from "../components/index";
+import { useAppContext } from "../context/AppContext";
 
 const LandingPage = () => {
+	const { user } = useAppContext();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (user) navigate("/");
+	}, [user, navigate]);
+
 	return (
 		<Wrapper>
 			<nav>
@@ -22,7 +31,9 @@ const LandingPage = () => {
 						doloribus placeat cupiditate aliquam ut nulla at quos
 						atque, ea consectetur magnam facilis voluptatibus animi!
 					</p>
-					<Link to='/register' className="btn btn-hero">Login/Register</Link>
+					<Link to="/register" className="btn btn-hero">
+						Login/Register
+					</Link>
 				</div>
 				<img src={Main} alt="main" className="img main-img" />
 			</div>

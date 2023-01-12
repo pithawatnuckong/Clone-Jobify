@@ -1,6 +1,6 @@
-import DashboardPage from "./DashboardPage";
 import ErrorPage from "./ErrorPage";
 import LandingPage from "./LandingPage";
-import RegisterPage from './RegisterPage'
+import RegisterPage from "./RegisterPage";
+import ProtectedRoute from "./ProtectedRoute";
 
-export { LandingPage, ErrorPage, RegisterPage, DashboardPage };
+export { LandingPage, ErrorPage, RegisterPage, ProtectedRoute };
