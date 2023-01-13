@@ -5,7 +5,7 @@ import {
 	registerUserAction,
 	loginUserAction,
 	toggleSlideBarAction,
-	logoutUserAction
+	logoutUserAction,
 } from "./actions";
 
 import reducer from "./reducers";
@@ -49,23 +49,23 @@ const AppProvider = ({ children }) => {
 	};
 
 	const toggleSlideBar = () => {
-		dispatch(toggleSlideBarAction(state.showSlideBar))
-	}
+		dispatch(toggleSlideBarAction());
+	};
 
 	const logoutUser = () => {
-		logoutUserAction(dispatch)
-	}
- 
+		logoutUserAction(dispatch);
+	};
+
 	return (
 		<AppContext.Provider
 			value={{
 				...state,
-				displayAlert: displayAlert,
-				clearAlert: clearAlert,
-				registerUser: registerUser,
-				loginUser: loginUser,
-				toggleSlideBar: toggleSlideBar,
-				logoutUser
+				displayAlert,
+				clearAlert,
+				registerUser,
+				loginUser,
+				toggleSlideBar,
+				logoutUser,
 			}}
 		>
 			{children}

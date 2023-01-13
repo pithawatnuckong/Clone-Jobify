@@ -29,7 +29,7 @@ function App() {
 				</Route>
 				<Route path="/landing" element={<LandingPage />} />
 				<Route path="/register" element={<RegisterPage />} />
-				<Route path="*" element={<ErrorPage/>} />
+				<Route path="*" element={<ErrorPage />} />
 			</Routes>
 		</BrowserRouter>
 	);
