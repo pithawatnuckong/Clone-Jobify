@@ -25,7 +25,7 @@ function App() {
 					<Route index element={<Stats />} />
 					<Route path="add-job" element={<AddJob />} />
 					<Route path="profile" element={<Profile />} />
-					<Route path="all-job" element={<AllJob />} />
+					<Route path="all-jobs" element={<AllJob />} />
 				</Route>
 				<Route path="/landing" element={<LandingPage />} />
 				<Route path="/register" element={<RegisterPage />} />
