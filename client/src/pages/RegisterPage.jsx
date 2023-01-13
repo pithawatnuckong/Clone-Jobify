@@ -62,7 +62,7 @@ const RegisterPage = () => {
 				navigate("/");
 			}, 1500);
 		}
-	}, [user, navigate, state]);
+	}, [user, navigate]);
 
 	return (
 		<Wrapper className="full-page">

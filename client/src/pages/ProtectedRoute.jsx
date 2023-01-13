@@ -1,10 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
-const ProtectedRoute = (props) => {
+const ProtectedRoute = ({children}) => {
 	const { user } = useAppContext();
 	if (user) {
-		return props.children;
+		return children;
 	}
 	return <Navigate to="/landing" />;
 };

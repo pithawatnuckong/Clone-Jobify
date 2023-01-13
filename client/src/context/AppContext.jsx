@@ -4,7 +4,10 @@ import {
 	showAlertAction,
 	registerUserAction,
 	loginUserAction,
+	toggleSlideBarAction,
+	logoutUserAction
 } from "./actions";
+
 import reducer from "./reducers";
 
 // Get data from local storage
@@ -21,6 +24,7 @@ const initialState = {
 	token: token || null,
 	userLocation: location,
 	jobLocation: "",
+	showSlideBar: false,
 };
 
 const AppContext = createContext();
@@ -44,6 +48,14 @@ const AppProvider = ({ children }) => {
 		loginUserAction(currentUser, dispatch);
 	};
 
+	const toggleSlideBar = () => {
+		dispatch(toggleSlideBarAction(state.showSlideBar))
+	}
+
+	const logoutUser = () => {
+		logoutUserAction(dispatch)
+	}
+ 
 	return (
 		<AppContext.Provider
 			value={{
@@ -52,6 +64,8 @@ const AppProvider = ({ children }) => {
 				clearAlert: clearAlert,
 				registerUser: registerUser,
 				loginUser: loginUser,
+				toggleSlideBar: toggleSlideBar,
+				logoutUser
 			}}
 		>
 			{children}

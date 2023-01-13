@@ -3,10 +3,12 @@ import {
 	LOGIN_USER_ERROR,
 	LOGIN_USER_PENDING,
 	LOGIN_USER_SUCCESS,
+	LOGOUT_USER,
 	REGISTER_USER_ERROR,
 	REGISTER_USER_PENDING,
 	REGISTER_USER_SUCCESS,
 	SHOW_ALERT,
+	TOGGLE_SLIDE_BAR,
 } from "./constants";
 import { initialState } from "./AppContext";
 
@@ -84,6 +86,22 @@ const reducer = (state = initialState, action = {}) => {
 			showAlert: true,
 		};
 	}
+	if (action.type === TOGGLE_SLIDE_BAR) {
+		return {
+			...state,
+			showSlideBar: !state.showSlideBar,
+		};
+	}
+	if (action.type === LOGOUT_USER) {
+		return {
+			...state,
+			user: null,
+			token: null,
+			userLocation: "",
+			jobLocation: "",
+		};
+	}
+
 	throw new Error(`No action such type ${action.type}`);
 };
 

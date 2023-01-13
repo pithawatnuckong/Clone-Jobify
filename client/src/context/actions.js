@@ -7,6 +7,8 @@ import {
 	LOGIN_USER_PENDING,
 	LOGIN_USER_SUCCESS,
 	SHOW_ALERT,
+	TOGGLE_SLIDE_BAR,
+	LOGOUT_USER,
 } from "./constants";
 
 import axios from "axios";
@@ -74,6 +76,17 @@ export const loginUserAction = async (currentUser, dispatch) => {
 			},
 		});
 	}
+};
+
+export const toggleSlideBarAction = () => ({
+	type: TOGGLE_SLIDE_BAR,
+});
+
+export const logoutUserAction = (dispatch) => {
+	dispatch({
+		type: LOGOUT_USER,
+	});
+	removeUserFromLocalStorage();
 };
 
 // add-on functional
