@@ -17,3 +17,8 @@ export const LOGOUT_USER = "LOGOUT_USER";
 
 // toggle navbar
 export const TOGGLE_SLIDE_BAR = "TOGGLE_SLIDE_BAR";
+
+// update user
+export const UPDATE_USER_PENDING = "UPDATE_USER_PENDING"
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS"
+export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR"

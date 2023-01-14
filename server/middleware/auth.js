@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import { UnAuthenticatedError } from "../errors/index.js";
 import jwt from "jsonwebtoken";
-import User from "../models/User.js";
 dotenv.config();
 
 const auth = async (req, res, next) => {
@@ -14,14 +13,7 @@ const auth = async (req, res, next) => {
 
 	try {
 		const { userId } = jwt.verify(token, process.env.JWT_SECRET);
-
-		const user = await User.findById(userId);
-
-		if (!user) {
-			throw new UnAuthenticatedError("Authentication Invalid");
-		}
-
-		req.user = { ...user._doc };
+		req.user = { userId };
 		next();
 	} catch (err) {
 		throw new UnAuthenticatedError("Authentication Invalid");

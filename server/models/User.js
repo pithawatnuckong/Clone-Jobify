@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import validator from "validator";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-dotenv.config()
+dotenv.config();
 
 const UserSchema = mongoose.Schema(
 	{
@@ -46,8 +46,13 @@ const UserSchema = mongoose.Schema(
 
 UserSchema.pre("save", async function () {
 	// salt
-	const salt = await bcrypt.genSalt(10);
-	this.password = await bcrypt.hash(this.password, salt);
+	if (this.isModified("password")) {
+		const salt = await bcrypt.genSalt(10);
+		this.password = await bcrypt.hash(this.password, salt);
+	}
+	//looking at what we are going to update from the root
+	console.log(this.modifiedPaths());
+	console.log(this.isModified("name"));
 });
 
 UserSchema.methods.createJWT = async function () {
@@ -59,7 +64,7 @@ UserSchema.methods.createJWT = async function () {
 };
 
 UserSchema.methods.checkPassword = async function (candidatePassword) {
-	return await bcrypt.compare(candidatePassword, this.password)
+	return await bcrypt.compare(candidatePassword, this.password);
 };
 
 export default mongoose.model("User", UserSchema);

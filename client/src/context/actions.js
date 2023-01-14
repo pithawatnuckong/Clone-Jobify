@@ -9,9 +9,12 @@ import {
 	SHOW_ALERT,
 	TOGGLE_SLIDE_BAR,
 	LOGOUT_USER,
+	UPDATE_USER_ERROR,
+	UPDATE_USER_PENDING,
+	UPDATE_USER_SUCCESS,
 } from "./constants";
 
-import axios from "axios";
+import { authFetch, axios } from "../utils/fetch";
 
 export const showAlertAction = (text) => ({
 	type: SHOW_ALERT,
@@ -27,7 +30,7 @@ export const registerUserAction = async (currentUser, dispatch) => {
 		type: REGISTER_USER_PENDING,
 	});
 	try {
-		const response = await axios.post("/api/v1/auth/register", currentUser);
+		const response = await axios.post("/auth/register", currentUser);
 		const { user, token, userLocation } = await response.data;
 		if (user.msg) {
 			throw new Error(user.msg[0]);
@@ -57,7 +60,7 @@ export const loginUserAction = async (currentUser, dispatch) => {
 	});
 	try {
 		const { user, token, userLocation } = await axios
-			.post("/api/v1/auth/login", currentUser)
+			.post("/auth/login", currentUser)
 			.then((res) => res.data);
 		dispatch({
 			type: LOGIN_USER_SUCCESS,
@@ -87,6 +90,32 @@ export const logoutUserAction = (dispatch) => {
 		type: LOGOUT_USER,
 	});
 	removeUserFromLocalStorage();
+};
+
+export const updateUserAction = async (dispatch, currentUser, currentToken) => {
+	dispatch({
+		type: UPDATE_USER_PENDING,
+	});
+	try {
+		const response = await authFetch.patch("/auth/updateUser", currentUser);
+		const { user, token, userLocation } = await response.data;
+		dispatch({
+			type: UPDATE_USER_SUCCESS,
+			payload: {
+				user,
+				token,
+				userLocation,
+			},
+		});
+		addUserToLocalStorage({ user, token, userLocation });
+	} catch (error) {
+		dispatch({
+			type: UPDATE_USER_ERROR,
+			payload: {
+				msg: error.response.data.msg,
+			},
+		});
+	}
 };
 
 // add-on functional

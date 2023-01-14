@@ -6,6 +6,7 @@ import {
 	loginUserAction,
 	toggleSlideBarAction,
 	logoutUserAction,
+	updateUserAction,
 } from "./actions";
 
 import reducer from "./reducers";
@@ -46,6 +47,7 @@ const AppProvider = ({ children }) => {
 
 	const loginUser = (currentUser) => {
 		loginUserAction(currentUser, dispatch);
+		clearAlertTimeout();
 	};
 
 	const toggleSlideBar = () => {
@@ -55,6 +57,18 @@ const AppProvider = ({ children }) => {
 	const logoutUser = () => {
 		logoutUserAction(dispatch);
 	};
+
+	const updateUser = (currentUser) => {
+		updateUserAction(dispatch, currentUser, state.token);
+		clearAlertTimeout();
+	};
+
+	// util function
+	function clearAlertTimeout() {
+		setTimeout(() => {
+			clearAlert();
+		}, 1500);
+	}
 
 	return (
 		<AppContext.Provider
@@ -66,6 +80,7 @@ const AppProvider = ({ children }) => {
 				loginUser,
 				toggleSlideBar,
 				logoutUser,
+				updateUser,
 			}}
 		>
 			{children}

@@ -9,6 +9,9 @@ import {
 	REGISTER_USER_SUCCESS,
 	SHOW_ALERT,
 	TOGGLE_SLIDE_BAR,
+	UPDATE_USER_ERROR,
+	UPDATE_USER_PENDING,
+	UPDATE_USER_SUCCESS,
 } from "./constants";
 import { initialState } from "./AppContext";
 
@@ -99,6 +102,34 @@ const reducer = (state = initialState, action = {}) => {
 			token: null,
 			userLocation: "",
 			jobLocation: "",
+		};
+	}
+	if (action.type === UPDATE_USER_PENDING) {
+		return {
+			...state,
+			isLoading: true,
+		};
+	}
+	if (action.type === UPDATE_USER_SUCCESS) {
+		return {
+			...state,
+			isLoading: false,
+			user: action.payload.user,
+			token: action.payload.token,
+			userLocation: action.payload.userLocation,
+			alertType: "success",
+			alertText: "Update successfully!",
+			showAlert: true,
+		};
+	}
+
+	if (action.type === UPDATE_USER_ERROR) {
+		return {
+			...state,
+			isLoading: false,
+			showAlert: true,
+			alertText: action.payload.msg,
+			alertType: "danger",
 		};
 	}
 
