@@ -13,7 +13,7 @@ const auth = async (req, res, next) => {
 
 	try {
 		const { userId } = jwt.verify(token, process.env.JWT_SECRET);
-		req.user = { userId };
+		req.user = { userId, token };
 		next();
 	} catch (err) {
 		throw new UnAuthenticatedError("Authentication Invalid");

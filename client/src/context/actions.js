@@ -92,7 +92,7 @@ export const logoutUserAction = (dispatch) => {
 	removeUserFromLocalStorage();
 };
 
-export const updateUserAction = async (dispatch, currentUser, currentToken) => {
+export const updateUserAction = async (dispatch, currentUser) => {
 	dispatch({
 		type: UPDATE_USER_PENDING,
 	});
