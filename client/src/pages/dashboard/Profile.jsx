@@ -6,23 +6,26 @@ import FormInput from "../../components/FormInput";
 
 import Alert from "../../components/Alert";
 
-const user = JSON.parse(localStorage.getItem("user"));
-
-
 const initialState = {
-	name: user?.name || "",
-	lastName: user?.lastName || "",
-	email: user?.email || "",
-	location: user?.location || "",
+	name: "",
+	lastName: "",
+	email: "",
+	location: "",
 };
 
 const Profile = () => {
-	const { isLoading, showAlert, displayAlert, clearAlert, updateUser } =
+	const { isLoading, showAlert, displayAlert, clearAlert, updateUser, user } =
 		useAppContext();
-	const [state, setState] = useState(initialState);
+	const [state, setState] = useState({
+		...initialState,
+		name: user.name,
+		lastName: user.lastName,
+		email: user.email,
+		location: user.location,
+	});
 
 	const onChangeHandler = (evt) => {
-	setState({ ...state, [evt.target.name]: evt.target.value });
+		setState({ ...state, [evt.target.name]: evt.target.value });
 		if (showAlert) clearAlert();
 	};
 

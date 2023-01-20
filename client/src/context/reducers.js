@@ -16,7 +16,6 @@ import {
 import { initialState } from "./AppContext";
 
 const reducer = (state = initialState, action = {}) => {
-	// console.log(action);
 	if (action.type === SHOW_ALERT) {
 		return {
 			...state,

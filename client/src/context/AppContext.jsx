@@ -45,8 +45,8 @@ const AppProvider = ({ children }) => {
 		registerUserAction(currentUser, dispatch);
 	};
 
-	const loginUser = (currentUser) => {
-		loginUserAction(currentUser, dispatch);
+	const loginUser = async (currentUser) => {
+		await loginUserAction(currentUser, dispatch);
 		clearAlertTimeout();
 	};
 
@@ -58,8 +58,8 @@ const AppProvider = ({ children }) => {
 		logoutUserAction(dispatch);
 	};
 
-	const updateUser = (currentUser) => {
-		updateUserAction(dispatch, currentUser, state.token);
+	const updateUser = async (currentUser) => {
+		await updateUserAction(dispatch, currentUser, state.token);
 		clearAlertTimeout();
 	};
 

@@ -59,9 +59,8 @@ export const loginUserAction = async (currentUser, dispatch) => {
 		type: LOGIN_USER_PENDING,
 	});
 	try {
-		const { user, token, userLocation } = await axios
-			.post("/auth/login", currentUser)
-			.then((res) => res.data);
+		const response = await axios.post("/auth/login", currentUser);
+		const { user, token, userLocation } = await response.data;
 		dispatch({
 			type: LOGIN_USER_SUCCESS,
 			payload: {
@@ -119,13 +118,13 @@ export const updateUserAction = async (dispatch, currentUser) => {
 };
 
 // add-on functional
-function addUserToLocalStorage({ user, token, userLocation }) {
+export function addUserToLocalStorage({ user, token, userLocation }) {
 	localStorage.setItem("user", JSON.stringify(user));
 	localStorage.setItem("token", token);
 	localStorage.setItem("location", userLocation);
 }
 
-function removeUserFromLocalStorage() {
+export function removeUserFromLocalStorage() {
 	localStorage.removeItem("user");
 	localStorage.removeItem("token");
 	localStorage.removeItem("location");

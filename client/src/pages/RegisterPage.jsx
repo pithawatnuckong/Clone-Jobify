@@ -26,6 +26,7 @@ const RegisterPage = () => {
 		loginUser,
 	} = useAppContext();
 	const [state, setState] = useState(initialState);
+	console.log(isLoading)
 
 	function onChangeHandler(evt) {
 		setState({ ...state, [evt.target.name]: evt.target.value });
@@ -60,7 +61,7 @@ const RegisterPage = () => {
 		if (user) {
 			setTimeout(() => {
 				navigate("/");
-			}, 1500);
+			}, 3000);
 		}
 	}, [user, navigate]);
 
