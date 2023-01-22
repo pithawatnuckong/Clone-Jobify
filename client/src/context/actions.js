@@ -12,6 +12,11 @@ import {
 	UPDATE_USER_ERROR,
 	UPDATE_USER_PENDING,
 	UPDATE_USER_SUCCESS,
+	ON_CHANGE_HANDLER,
+	CLEAR_HANDLER,
+	CREATE_JOB_PENDING,
+	CREATE_JOB_ERROR,
+	CREATE_JOB_SUCCESS,
 } from "./constants";
 
 import { authFetch, axios } from "../utils/fetch";
@@ -116,6 +121,42 @@ export const updateUserAction = async (dispatch, currentUser) => {
 		});
 	}
 };
+
+export const createJobAction = async (dispatch, currentForm) => {
+	dispatch({
+		type: CREATE_JOB_PENDING,
+	});
+	try {
+		await authFetch.post("/jobs", currentForm).then((res) => {
+			console.log(res.data);
+		});
+		dispatch({
+			type: CREATE_JOB_SUCCESS,
+		});
+	} catch (error) {
+		if (error.response.status === 401) return;
+		dispatch({
+			type: CREATE_JOB_ERROR,
+			payload: {
+				msg: error.response.data.msg,
+			},
+		});
+	}
+};
+
+export const handleChangeAction = (dispatch, { name, value }) => {
+	dispatch({
+		type: ON_CHANGE_HANDLER,
+		payload: {
+			name,
+			value,
+		},
+	});
+};
+
+export const clearHandlerAction = () => ({
+	type: CLEAR_HANDLER,
+});
 
 // add-on functional
 export function addUserToLocalStorage({ user, token, userLocation }) {

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { removeUserFromLocalStorage } from "../context/actions";
 
-const token = localStorage.getItem("token");
 // first way
 // axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`
 // export default axios;
@@ -13,6 +12,7 @@ const authFetch = axios.create({
 
 authFetch.interceptors.request.use(
 	(config) => {
+		const token = localStorage.getItem("token");
 		config.headers["Authorization"] = `Bearer ${token}`;
 		return config;
 	},
@@ -30,7 +30,7 @@ authFetch.interceptors.response.use(
 			removeUserFromLocalStorage();
 			window.location.href = "/";
 		}
-		return error;
+		return Promise.reject(error);
 	},
 );
 
@@ -43,6 +43,7 @@ axios.interceptors.request.use(
 	},
 	(error) => {
 		console.log(`Axios Error From Request ${error}`);
+		return Promise.reject(error);
 	},
 );
 
@@ -52,6 +53,7 @@ axios.interceptors.response.use(
 	},
 	(error) => {
 		console.log(`Axios Error From Response ${error}`);
+		return Promise.reject(error);
 	},
 );
 

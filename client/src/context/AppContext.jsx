@@ -7,6 +7,9 @@ import {
 	toggleSlideBarAction,
 	logoutUserAction,
 	updateUserAction,
+	handleChangeAction,
+	clearHandlerAction,
+	createJobAction,
 } from "./actions";
 
 import reducer from "./reducers";
@@ -26,6 +29,14 @@ const initialState = {
 	userLocation: location,
 	jobLocation: "",
 	showSlideBar: false,
+	isEditing: false,
+	editingId: "",
+	company: "",
+	position: "",
+	status: "pending",
+	jobType: "full-time",
+	statusOptions: ["pending", "declined", "interview"],
+	jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
 };
 
 const AppContext = createContext();
@@ -41,8 +52,9 @@ const AppProvider = ({ children }) => {
 		dispatch(clearAlertAction());
 	};
 
-	const registerUser = (currentUser) => {
-		registerUserAction(currentUser, dispatch);
+	const registerUser = async (currentUser) => {
+		await registerUserAction(currentUser, dispatch);
+		clearAlertTimeout();
 	};
 
 	const loginUser = async (currentUser) => {
@@ -60,6 +72,20 @@ const AppProvider = ({ children }) => {
 
 	const updateUser = async (currentUser) => {
 		await updateUserAction(dispatch, currentUser, state.token);
+		clearAlertTimeout();
+	};
+
+	const handleChange = async ({ name, value }) => {
+		handleChangeAction(dispatch, { name, value });
+	};
+
+	const clearHandler = async () => {
+		dispatch(clearHandlerAction());
+	};
+
+	const createJob = async (currentForm) => {
+		await createJobAction(dispatch, currentForm);
+		clearHandler();
 		clearAlertTimeout();
 	};
 
@@ -81,13 +107,15 @@ const AppProvider = ({ children }) => {
 				toggleSlideBar,
 				logoutUser,
 				updateUser,
+				handleChange,
+				clearHandler,
+				createJob,
 			}}
 		>
 			{children}
 		</AppContext.Provider>
 	);
 };
-
 const useAppContext = () => {
 	return useContext(AppContext);
 };

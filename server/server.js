@@ -38,16 +38,15 @@ await connectDB(process.env.MONGODB_URL)
 		console.log(err);
 	});
 
+// routes
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/jobs", authenticateUser, jobRouter);
+
 app.get("/api/v1/welcome", (req, res) => {
 	res.status(200).json({
 		msg: "hello",
 	});
 });
-
-// routes
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", authenticateUser, jobRouter);
-
 // Error handler middleware
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

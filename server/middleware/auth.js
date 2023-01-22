@@ -4,7 +4,8 @@ import jwt from "jsonwebtoken";
 dotenv.config();
 
 const auth = async (req, res, next) => {
-	const userAuth = req.headers.authorization;
+	// const userAuth = req.headers.authorization;
+	const { authorization: userAuth } = req.headers;
 
 	if (!userAuth || !userAuth.startsWith(process.env.SECRET_HEADER))
 		throw new UnAuthenticatedError("Authentication Invalid");

@@ -1,9 +1,14 @@
 import {
 	CLEAR_ALERT,
+	CLEAR_HANDLER,
+	CREATE_JOB_ERROR,
+	CREATE_JOB_PENDING,
+	CREATE_JOB_SUCCESS,
 	LOGIN_USER_ERROR,
 	LOGIN_USER_PENDING,
 	LOGIN_USER_SUCCESS,
 	LOGOUT_USER,
+	ON_CHANGE_HANDLER,
 	REGISTER_USER_ERROR,
 	REGISTER_USER_PENDING,
 	REGISTER_USER_SUCCESS,
@@ -129,6 +134,49 @@ const reducer = (state = initialState, action = {}) => {
 			showAlert: true,
 			alertText: action.payload.msg,
 			alertType: "danger",
+		};
+	}
+
+	if (action.type === ON_CHANGE_HANDLER) {
+		return { ...state, [action.payload.name]: action.payload.value };
+	}
+
+	if (action.type === CLEAR_HANDLER) {
+		const defaultState = {
+			position: "",
+			company: "",
+			jobLocation: "",
+			isEditing: false,
+			editingId: "",
+			jobType: "full-time",
+			status: "pending",
+		};
+		return { ...state, ...defaultState };
+	}
+	if (action.type === CREATE_JOB_PENDING) {
+		return {
+			...state,
+			isLoading: true,
+		};
+	}
+
+	if (action.type === CREATE_JOB_SUCCESS) {
+		return {
+			...state,
+			showAlert: true,
+			alertType: "success",
+			alertText: "Job created!",
+			isLoading: false,
+		};
+	}
+
+	if (action.type === CREATE_JOB_ERROR) {
+		return {
+			...state,
+			showAlert: true,
+			alertType: "danger",
+			alertText: action.payload.msg,
+			isLoading: false,
 		};
 	}
 
