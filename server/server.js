@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import "express-async-errors";
 
+//db connection
 import connectDB from "./database/connect.js";
 
 //middleware

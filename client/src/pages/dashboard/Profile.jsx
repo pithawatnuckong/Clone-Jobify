@@ -16,6 +16,7 @@ const initialState = {
 const Profile = () => {
 	const { isLoading, showAlert, displayAlert, clearAlert, updateUser, user } =
 		useAppContext();
+
 	const [state, setState] = useState({
 		...initialState,
 		name: user.name,
