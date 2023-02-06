@@ -10,6 +10,7 @@ import {
 	handleChangeAction,
 	clearHandlerAction,
 	createJobAction,
+	getAllJobsAction
 } from "./actions";
 
 import reducer from "./reducers";
@@ -37,6 +38,9 @@ const initialState = {
 	jobType: "full-time",
 	statusOptions: ["pending", "declined", "interview"],
 	jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
+	jobs: [],
+	totalJobs: 0,
+	numOfPages: 0
 };
 
 const AppContext = createContext();
@@ -89,6 +93,10 @@ const AppProvider = ({ children }) => {
 		clearAlertTimeout();
 	};
 
+	const getAllJobs = async () => {
+		await getAllJobsAction(dispatch);
+	}
+
 	// util function
 	function clearAlertTimeout() {
 		setTimeout(() => {
@@ -110,6 +118,7 @@ const AppProvider = ({ children }) => {
 				handleChange,
 				clearHandler,
 				createJob,
+				getAllJobs,
 			}}
 		>
 			{children}

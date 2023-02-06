@@ -17,6 +17,9 @@ import {
 	CREATE_JOB_PENDING,
 	CREATE_JOB_ERROR,
 	CREATE_JOB_SUCCESS,
+	GET_ALL_JOBS_PENDING,
+	GET_ALL_JOBS_SUCCESS,
+	GET_ALL_JOBS_ERROR,
 } from "./constants";
 
 import { authFetch, axios } from "../utils/fetch";
@@ -157,6 +160,26 @@ export const handleChangeAction = (dispatch, { name, value }) => {
 export const clearHandlerAction = () => ({
 	type: CLEAR_HANDLER,
 });
+
+export const getAllJobsAction = async (dispatch) => {
+	dispatch({
+		type: GET_ALL_JOBS_PENDING,
+	});
+	try {
+		const { jobs, totalJobs, numOfPages } = await authFetch
+			.get("/jobs")
+			.then((res) => res.data);
+		dispatch({
+			type: GET_ALL_JOBS_SUCCESS,
+			payload: { jobs, totalJobs, numOfPages },
+		});
+	} catch (error){
+		if(error.response.status === 401) return
+		dispatch({
+			type: GET_ALL_JOBS_ERROR
+		})
+	}
+};
 
 // add-on functional
 export function addUserToLocalStorage({ user, token, userLocation }) {
