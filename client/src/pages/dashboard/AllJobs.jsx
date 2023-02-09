@@ -1,19 +1,11 @@
-import { useEffect } from "react";
-import { useAppContext } from "../../context/AppContext";
+import { JobsContainer, SearchContainer } from "../../components";
 
 const AllJobs = () => {
-	const { getAllJobs, isLoading } = useAppContext();
-
-	useEffect(() => {
-		getAllJobs();
-	}, []);
-
-	return <div>
-    {isLoading ? (
-      <h1 style={{textTransform: 'capitalize'}}>loading</h1>
-    ) : (
-      <h1 style={{textTransform: 'capitalize'}}>success</h1>
-    )}
-  </div>;
+	return (
+		<>
+			<SearchContainer />
+			<JobsContainer />
+		</>
+	);
 };
 export default AllJobs;

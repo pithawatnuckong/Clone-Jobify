@@ -4,7 +4,6 @@ import {
 	CREATE_JOB_ERROR,
 	CREATE_JOB_PENDING,
 	CREATE_JOB_SUCCESS,
-	GET_ALL_JOBS_ERROR,
 	GET_ALL_JOBS_PENDING,
 	GET_ALL_JOBS_SUCCESS,
 	LOGIN_USER_ERROR,
@@ -183,11 +182,12 @@ const reducer = (state = initialState, action = {}) => {
 		};
 	}
 
-	if (action.type === GET_ALL_JOBS_PENDING){
-		return{
+	if (action.type === GET_ALL_JOBS_PENDING) {
+		return {
 			...state,
-			isLoading: true
-		}
+			isLoading: true,
+			showAlert: false,
+		};
 	}
 
 	if (action.type === GET_ALL_JOBS_SUCCESS) {
@@ -196,15 +196,8 @@ const reducer = (state = initialState, action = {}) => {
 			jobs: action.payload.jobs,
 			numOfPages: action.payload.numOfPages,
 			totalJobs: action.payload.totalJobs,
-			isLoading: false
-		}
-	}
-
-	if (action.type === GET_ALL_JOBS_ERROR) {
-		return {
-			...state,
-			isLoading: false
-		}
+			isLoading: false,
+		};
 	}
 
 	throw new Error(`No action such type ${action.type}`);

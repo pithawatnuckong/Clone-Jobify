@@ -52,7 +52,7 @@ UserSchema.pre("save", async function () {
 	}
 	//looking at what we are going to update from the root
 	console.log(this.modifiedPaths());
-	console.log(this.isModified("name"));
+	console.log(this.isModified("name")); //if field password is modified status wll be true
 });
 
 UserSchema.methods.createJWT = async function () {

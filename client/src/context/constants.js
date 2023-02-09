@@ -35,4 +35,3 @@ export const CREATE_JOB_ERROR = "CREATE_JOB_ERROR";
 // get all jobs
 export const GET_ALL_JOBS_PENDING = "GET_ALL_JOBS_PENDING";
 export const GET_ALL_JOBS_SUCCESS = "GET_ALL_JOBS_SUCCESS";
-export const GET_ALL_JOBS_ERROR = "GET_ALL_JOBS_ERROR";

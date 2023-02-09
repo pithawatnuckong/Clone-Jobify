@@ -19,7 +19,6 @@ import {
 	CREATE_JOB_SUCCESS,
 	GET_ALL_JOBS_PENDING,
 	GET_ALL_JOBS_SUCCESS,
-	GET_ALL_JOBS_ERROR,
 } from "./constants";
 
 import { authFetch, axios } from "../utils/fetch";
@@ -173,11 +172,9 @@ export const getAllJobsAction = async (dispatch) => {
 			type: GET_ALL_JOBS_SUCCESS,
 			payload: { jobs, totalJobs, numOfPages },
 		});
-	} catch (error){
-		if(error.response.status === 401) return
-		dispatch({
-			type: GET_ALL_JOBS_ERROR
-		})
+	} catch (error) {
+		if (error.response.status === 401) return;
+		console.log(error.response);
 	}
 };
 
