@@ -11,6 +11,7 @@ import {
 	clearHandlerAction,
 	createJobAction,
 	getAllJobsAction,
+	setEditJobIdAction,
 } from "./actions";
 
 import reducer from "./reducers";
@@ -99,8 +100,10 @@ const AppProvider = ({ children }) => {
 	};
 
 	const setEditJobId = async (id) => {
-		console.log(`this is job editing id ${id}`);
+		setEditJobIdAction(dispatch, id);
 	};
+
+	const editJob = async () => {};
 
 	const setDeleteJobId = async (id) => {
 		console.log(`this is deleting job id ${id}`);
@@ -130,6 +133,7 @@ const AppProvider = ({ children }) => {
 				getAllJobs,
 				setDeleteJobId,
 				setEditJobId,
+				editJob,
 			}}
 		>
 			{children}

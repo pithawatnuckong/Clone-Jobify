@@ -14,6 +14,7 @@ import {
 	REGISTER_USER_ERROR,
 	REGISTER_USER_PENDING,
 	REGISTER_USER_SUCCESS,
+	SET_EDIT_JOB_ID,
 	SHOW_ALERT,
 	TOGGLE_SLIDE_BAR,
 	UPDATE_USER_ERROR,
@@ -197,6 +198,21 @@ const reducer = (state = initialState, action = {}) => {
 			numOfPages: action.payload.numOfPages,
 			totalJobs: action.payload.totalJobs,
 			isLoading: false,
+		};
+	}
+
+	if (action.type === SET_EDIT_JOB_ID) {
+		const { company, jobLocation, jobType, position, status } =
+			state.jobs.find((job) => job._id === action.payload.id);
+		return {
+			...state,
+			isEditing: true,
+			editJobId: action.payload.id,
+			company,
+			jobLocation,
+			jobType,
+			position,
+			status,
 		};
 	}
 

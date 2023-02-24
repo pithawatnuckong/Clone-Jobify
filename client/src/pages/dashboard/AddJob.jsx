@@ -19,6 +19,7 @@ const AddJob = () => {
 		handleChange,
 		clearHandler,
 		createJob,
+		editJob,
 	} = useAppContext();
 
 	const onChangeHandler = (evt) => {
@@ -39,14 +40,16 @@ const AddJob = () => {
 			displayAlert("Please provide all values");
 			return;
 		}
-		if (isEditing) return;
+		if (isEditing) {
+			editJob();
+			return;
+		}
 		createJob({ position, company, jobLocation, status, jobType });
 	};
 
 	const onClearHandler = (evt) => {
 		evt.preventDefault();
 		clearHandler();
-		console.log("Clear button");
 	};
 
 	return (

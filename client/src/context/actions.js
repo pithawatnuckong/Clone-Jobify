@@ -19,6 +19,7 @@ import {
 	CREATE_JOB_SUCCESS,
 	GET_ALL_JOBS_PENDING,
 	GET_ALL_JOBS_SUCCESS,
+	SET_EDIT_JOB_ID,
 } from "./constants";
 
 import { authFetch, axios } from "../utils/fetch";
@@ -176,6 +177,13 @@ export const getAllJobsAction = async (dispatch) => {
 		if (error.response.status === 401) return;
 		console.log(error.response);
 	}
+};
+
+export const setEditJobIdAction = (dispatch, id) => {
+	dispatch({
+		type: SET_EDIT_JOB_ID,
+		payload: { id },
+	});
 };
 
 // add-on functional

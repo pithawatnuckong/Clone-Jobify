@@ -35,3 +35,7 @@ export const CREATE_JOB_ERROR = "CREATE_JOB_ERROR";
 // get all jobs
 export const GET_ALL_JOBS_PENDING = "GET_ALL_JOBS_PENDING";
 export const GET_ALL_JOBS_SUCCESS = "GET_ALL_JOBS_SUCCESS";
+
+// set edit and delete id
+export const SET_EDIT_JOB_ID = "SET_EDIT_JOB_ID";
+export const SET_DELETE_JOB_ID = "SET_DELETE_JOB_ID";
