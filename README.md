@@ -14,5 +14,5 @@ This Project is a web application and is not supported on mobile phones or table
 - react-router-dom
 - NodeJS
 - ExpressJS
-- MongoDB
 - JWT authentication
+- MongoDB
